@@ -29,11 +29,22 @@ class Penduduk_m extends CI_Model
 
     public function getAllDusun()
     {
-        return $this->db->get('dusun')->result_array();
+        $query = $this->db->query("select * from dusun");
+        return $query;
+        // return $this->db->get('dusun')->result_array();
     }
 
-    public function getAllRt()
+    public function getAllRt($id_dusun)
     {
+        $query = $this->db->query("select * from rt left join dusun on rt.id_dusun=dusun.id where rt.id='$id'");
+        return $query;
+        // return $this->db->get('rt')->result_array();
+    }
+
+
+    public function viewByDusun()
+    {
+        $this->db->where('id_dusun = 1');
         return $this->db->get('rt')->result_array();
     }
 }

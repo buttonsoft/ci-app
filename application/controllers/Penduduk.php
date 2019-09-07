@@ -13,11 +13,14 @@ class Penduduk extends CI_Controller
     public function index()
     {
         $penduduk = $this->penduduk_m;
-        $data['penduduk'] = $penduduk->getAllPenduduk();
+        // $data['penduduk'] = $penduduk->getAllPenduduk();
         // $data['dusun'] = $penduduk->getAllDusun();
-        // $data['rt'] = $penduduk->getAllRt();
+        // $data['rt'] = $penduduk->viewByDusun();
+        // echo "<pre>";
         // print_r($data['rt']);
         // die;
+        // echo "</pre>";
+
         $data['title'] = "Penduduk";
         $this->load->view('_partials/header', $data);
         $this->load->view('_partials/top_menu', $data);
@@ -27,6 +30,9 @@ class Penduduk extends CI_Controller
 
     public function add()
     {
+        $penduduk = $this->penduduk_m;
+        $data['dusun'] = $penduduk->getAllDusun();
+
         $this->load->library('form_validation');
         $this->form_validation->set_rules('nik', 'NIK', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -45,5 +51,13 @@ class Penduduk extends CI_Controller
             $this->session->set_flashdata('message', 'Data penduduk berhasil ditambahkan');
             redirect('penduduk');
         }
+    }
+
+    public function listRt()
+    {
+        $penduduk = $this->penduduk_m;
+        $id = $this->input->post('id');
+        $data['rt'] = $penduduk->getAllRt($id);
+        $this->load->view('penduduk/rt', $data);
     }
 }
