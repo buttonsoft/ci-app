@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dropdown_m extends CI_Model
+class Sinkron_m extends CI_Model
 {
 
     public function nm_kelas()
